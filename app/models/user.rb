@@ -7,6 +7,6 @@ class User < ApplicationRecord
   #validations
   validates :name , presence: :true
   validates :email , presence: :true
-  validates :username , presence: :true, uniqueness: true
+  validates :username , presence: :true , uniqueness: true
   validates :user_type, presence: true, inclusion: {in: USER_TYPE_RANGE}
 end

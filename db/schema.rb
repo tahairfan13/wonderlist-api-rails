@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20180416111955) do
     t.index ["user_id"], name: "index_auths_on_user_id"
   end
 
-  create_table "lists", force: :cascade do |t|
+  create_table "lists", force: :cascade do |tU|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

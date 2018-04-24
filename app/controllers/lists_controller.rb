@@ -3,7 +3,7 @@ class ListsController < ApplicationController
   before_action :authenticate_user, only: [:create,:update,:destroy,:index,:show]
 
   def index
-    if params[:page].present? and params[:timestamp].present?
+    if params[:page].present? and params[:timestamp].present? #for pagination
       @lists = @current_user.lists.order('id DESC').where('lists.created_at <= ?', params[:timestamp].to_datetime).page(params[:page].to_i)
       @timestamp = params[:timestamp].to_datetime
     else
