@@ -8,9 +8,13 @@ Rails.application.routes.draw do
 
     put '/users/edit_profile',to: 'users#update'
     
+
     resources :lists do
       resources :tasks
     end
+
+    resources :documents , only: [:show,:create,:destroy]
+
 
     get '/admin/users', to: 'admin_services#index'
     put '/admin/users/:id/change_status', to: 'admin_services#change_user_status'

@@ -2,28 +2,27 @@ class SessionsController < ApplicationController
   before_action :authenticate_user, only: [:destroy]
 
   def create
-    if params[:password].present? and params[:username].present?
-      @user = User.find_by(username: params[:username].to_s)
-      if !@user.nil?
-        @auth = @user.auth
-          if @auth.authenticate(params[:password])
-            @session = @user.sessions.build
-            if @session.save
-             return render_success_user_created #added myself
-            else 
-              return render_error_session_not_saved
-            end
-          else
-            return render_error_password_mismatch
-          end
-
-      else
-        return render_error_user_not_found
-      end
-    else
-      return render_error_invalid_params
-    end
-  end
+ if params[:password].present? and params[:username].present?
+     @user = User.find_by(username: params[:username].to_s)
+     if !@user.nil?
+       @auth = @user.auth
+         if @auth.authenticate(params[:password])
+           @session = @user.sessions.build
+           if @session.save
+            return render_success_user_created #added myself
+           else 
+             return render_error_session_not_saved
+           end
+         else
+         return render_error_password_mismatch
+         end
+     else
+      return render_error_user_not_found
+     end
+   else
+     return render_error_invalid_params
+   end
+   end
 
   def destroy
     @current_session.update(sign_in_status: false)

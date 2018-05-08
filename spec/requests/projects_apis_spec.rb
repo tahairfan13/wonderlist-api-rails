@@ -71,7 +71,9 @@ RSpec.describe "ProjectsApis", type: :request do
 
     end
 
+    it "User update his lists" do
 
+    end
 
   end
   end

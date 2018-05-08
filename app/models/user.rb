@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_one :auth , dependent: :destroy
   has_many :sessions , dependent: :destroy # check
   has_many :lists, dependent: :destroy
+  has_many :documents, dependent: :destroy
 
   #validations
   validates :name , presence: :true

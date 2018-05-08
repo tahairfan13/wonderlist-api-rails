@@ -20,6 +20,7 @@ gem 'puma', '~> 3.7'
  gem 'bcrypt', '~> 3.1.7'
  gem 'pundit', '~> 1.1'
  gem 'kaminari'
+ gem 'paperclip', '~> 4.3', '>= 4.3.6'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

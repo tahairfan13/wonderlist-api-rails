@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180416111955) do
+ActiveRecord::Schema.define(version: 20180508104943) do
 
   create_table "auths", force: :cascade do |t|
     t.integer "status", default: 1, null: false
@@ -21,7 +21,21 @@ ActiveRecord::Schema.define(version: 20180416111955) do
     t.index ["user_id"], name: "index_auths_on_user_id"
   end
 
-  create_table "lists", force: :cascade do |tU|
+  create_table "documents", force: :cascade do |t|
+    t.string "name"
+    t.string "documentable_type"
+    t.integer "documentable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "doc_file_name"
+    t.string "doc_content_type"
+    t.integer "doc_file_size"
+    t.datetime "doc_updated_at"
+    t.integer "user_id"
+    t.index ["documentable_type", "documentable_id"], name: "index_documents_on_documentable_type_and_documentable_id"
+  end
+
+  create_table "lists", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
