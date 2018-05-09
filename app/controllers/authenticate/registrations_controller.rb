@@ -1,5 +1,5 @@
-module Authenticate
-  #Auth::RegistrationsController < ApplicationController 
+module Authenticate 
+  #Auth::RegistrationsController < ApplicationController #for namespace in routes 
   class RegistrationsController < ApplicationController
 
     before_action :authenticate_user, only: [:destroy]

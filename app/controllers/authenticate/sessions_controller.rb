@@ -1,4 +1,4 @@
-module Auth
+module Authenticate
   class SessionsController < ApplicationController
     before_action :authenticate_user, only: [:destroy]
 
