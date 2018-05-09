@@ -62,7 +62,7 @@ class ApplicationController < ActionController::API
   end
 
   def render_error_unauthorized
-    render status: :unauthorized, json: {errors: ["You are no authorized for this request."]}
+    render status: :unauthorized, json: {errors: ["You are not authorized for this request."]}
   end
 
   def render_error_invalid_tokens

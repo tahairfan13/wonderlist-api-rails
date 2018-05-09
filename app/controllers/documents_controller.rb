@@ -1,39 +1,45 @@
 class DocumentsController < ApplicationController
 
-before_action :find_params, only: [:show,:destroy]
-before_action :authenticate_user, only: [:create]
+  before_action :find_document, only: [:show, :destroy]
+  before_action :authenticate_user, only: [:create,:destroy]
 
-def create
-  @doc = @current_user.documents.build(doc_params)
-  if @doc.save
-  	render status: :ok , json: {success: "Doc successfully created" }
-  else
-  	render status: :unprocessable_entity , json: {errors: @doc.errors.full_messages }	
+  def create
+    @document = @current_user.documents.build(doc_params)
+    if @document.save
+    	render status: :ok , template: "documents/show"
+    else
+    	render status: :unprocessable_entity , json: {errors: @document.errors.full_messages }	
+    end
   end
 
-end
-
-def show
-	
-end
-
-def destroy
-	@doc.destroy
-end
-
- private
-
- def doc_params
-    params.permit(:input,:documentable_id,:documentable_type)
+  def show
+  	
   end
 
-  def find_params
-    @doc = Document.find(params[:id])
+  def destroy
+    if @current_user == @document.user
+  	 @document.destroy
+    else
+     return render_error_unauthorized_user
+    end
+  end
+
+  private
+
+  def render_error_unauthorized_user
+    render status: :unauthorize , json: {errors: "unauthorize User"} 
   end
 
 
+  def doc_params
+    params.permit(:input)
+  end
+
+  def find_document
+    @document = Document.find(params[:id])
+  end
 #
 #1 MODEL
 #2 Application Controller for recieving the URL of the image
-
+#3 4 fixed attributes are required
 end

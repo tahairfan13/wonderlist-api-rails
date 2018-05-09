@@ -31,3 +31,6 @@
 
 en:
   hello: "Hello world"
+  document:
+    same_doc_attached: "Same document attached already"
+    unauthorize: "User cannot perform this action"

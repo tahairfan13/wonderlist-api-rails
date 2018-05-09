@@ -1,15 +1,15 @@
 class Document < ApplicationRecord
   # associations	
   belongs_to :user, dependent: :destroy
-  belongs_to :documentable, polymorphic: true
+  belongs_to :documentable, polymorphic: true, optional: true
   has_attached_file :doc
 
   attr_accessor :input #this will be the attribute we use to send the data
 
   #validation
-  before_create :decode_base64_doc
+  before_validation :decode_base64_doc, on: :create
   validates_attachment_content_type :doc, :content_type =>["image/jpg", "image/jpeg", "image/png", "image/gif"]
-
+  validates_presence_of :doc
 
   protected
   def decode_base64_doc
