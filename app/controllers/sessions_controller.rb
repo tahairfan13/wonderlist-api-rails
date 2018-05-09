@@ -1,3 +1,5 @@
+module Authentication
+
 class SessionsController < ApplicationController
   before_action :authenticate_user, only: [:destroy]
 
@@ -52,5 +54,7 @@ class SessionsController < ApplicationController
     render status: :unprocessable_entity, json: {errors: @session.errors.full_messages}
   end
 
+
+end
 
 end

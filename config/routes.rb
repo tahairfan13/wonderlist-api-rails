@@ -1,10 +1,22 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   scope :api ,defaults: {format: 'json'} do
-    post '/auth/sign_up', to: 'registrations#create'
-    post '/auth/sign_in',to: 'sessions#create'
-    delete '/auth/destroy',to: 'registrations#destroy'
-    delete '/auth/sign_out', to: 'sessions#destroy'
+    
+    scope module: 'authenticate',path: 'auth' do
+      post '/sign_up', to: 'registrations#create'
+      post '/sign_in',to: 'sessions#create'
+      delete '/destroy',to: 'registrations#destroy'
+      delete '/sign_out', to: 'sessions#destroy'
+    end
+
+    # namespace :auth do
+    #   post '/sign_up', to: 'registrations#create'
+    #   post '/sign_in',to: 'sessions#create'
+    #   delete '/destroy',to: 'registrations#destroy'
+    #   delete '/sign_out', to: 'sessions#destroy'
+
+    # end  
+
 
     put '/users/edit_profile',to: 'users#update'
     

@@ -16,9 +16,20 @@ class TasksController < ApplicationController
     @task = @list.tasks.build(task_params)
     authorize @task
     if @task.save
-      return render_success_task_created
-    else
-      return render_error_task_not_saved
+      if params[:documents_id].present?
+        docs = params[:documents_id]
+        docs.each do |d|
+        document = Document.find_by(id: d)
+        unless document.nil?
+          if document.user == @current_user
+            document.update(documentable: @task)
+            end
+          end 
+        end
+      end  
+        return render_success_task_created
+      else
+        return render_error_task_not_saved
     end
   end
 
@@ -29,6 +40,17 @@ class TasksController < ApplicationController
   def update
     authorize @task
     if @task.update(task_params)
+      if params[:documents_id].present?
+        docs = params[:documents_id]
+        docs.each do |d|
+        document = Document.find_by(id: d)
+          unless document.nil?
+            if document.user == @current_user
+              document.update(documentable: @task)
+            end
+          end
+        end
+      end
       return render_success_task_show
     else
       return render_error_task_not_saved
@@ -41,6 +63,7 @@ class TasksController < ApplicationController
   end
 
   protected
+
 
   def render_success_task_created
     render status: :created, template: "tasks/show"
