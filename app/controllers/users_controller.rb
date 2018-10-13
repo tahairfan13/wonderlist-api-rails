@@ -10,6 +10,10 @@ def update
 	end
 end
 
+def page
+
+end
+
 
 
 protected

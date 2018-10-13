@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root "user#page"
   scope :api ,defaults: {format: 'json'} do
     
     scope module: 'authenticate',path: 'auth' do
@@ -9,14 +10,7 @@ Rails.application.routes.draw do
       delete '/sign_out', to: 'sessions#destroy'
     end
 
-    # namespace :auth do
-    #   post '/sign_up', to: 'registrations#create'
-    #   post '/sign_in',to: 'sessions#create'
-    #   delete '/destroy',to: 'registrations#destroy'
-    #   delete '/sign_out', to: 'sessions#destroy'
-
-    # end  
-
+    root 'static_pages#show'
 
     put '/users/edit_profile',to: 'users#update'
     
