@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root "user#page"
+  root 'static_pages#index'
   scope :api ,defaults: {format: 'json'} do
     
     scope module: 'authenticate',path: 'auth' do
