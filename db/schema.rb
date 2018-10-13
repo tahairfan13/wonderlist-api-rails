@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20180508104943) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "auths", force: :cascade do |t|
     t.integer "status", default: 1, null: false
     t.string "password_digest", null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_auths_on_user_id"
@@ -24,7 +27,7 @@ ActiveRecord::Schema.define(version: 20180508104943) do
   create_table "documents", force: :cascade do |t|
     t.string "name"
     t.string "documentable_type"
-    t.integer "documentable_id"
+    t.bigint "documentable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "doc_file_name"
@@ -44,7 +47,7 @@ ActiveRecord::Schema.define(version: 20180508104943) do
 
   create_table "sessions", force: :cascade do |t|
     t.string "stoken"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "sign_in_status", default: true, null: false
@@ -68,4 +71,6 @@ ActiveRecord::Schema.define(version: 20180508104943) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "auths", "users"
+  add_foreign_key "sessions", "users"
 end
